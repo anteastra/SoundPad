@@ -57,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
     public static class PlaceholderFragment extends Fragment {
 
     	private Button uaButton;
+    	private Button allButton;
     	private MediaPlayer player;
     	
         public PlaceholderFragment() {
@@ -67,12 +68,21 @@ public class MainActivity extends ActionBarActivity {
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             uaButton = (Button) rootView.findViewById(R.id.buttonUa);
+            allButton = (Button) rootView.findViewById(R.id.buttonAll);
             
             uaButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					play(getActivity());
+					play(getActivity(), R.raw.uaua);
+				}
+			});
+            
+            allButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					play(getActivity(), R.raw.alliluya);
 				}
 			});
             
@@ -92,11 +102,11 @@ public class MainActivity extends ActionBarActivity {
         	}
         }
         
-        private void play(Context context) {
+        private void play(Context context, int resource) {
         	
         	stop();
         	
-        	player = MediaPlayer.create(context, R.raw.uaua);
+        	player = MediaPlayer.create(context, resource);
         	player.setOnCompletionListener(new OnCompletionListener() {
 				
 				@Override
